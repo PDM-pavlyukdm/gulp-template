@@ -11,9 +11,6 @@ Thumbs.db
 *.log*
 node_modules/
 reports/
-/build/img/
-/src/pages/images/
-/src/pages/images-cache/
 
 # Папка с собранными файлами проекта
 # build/
