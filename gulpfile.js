@@ -11,11 +11,14 @@ const copyDependencies = require('./gulp/tasks/copyDependencies')
 const lighthouse = require('./gulp/tasks/lighthouse')
 const svgSprite = require('./gulp/tasks/svgSprite')
 
-const dev = gulp.parallel(pug2html, styles, script, fonts, imageMinify, svgSprite)
+const dev = gulp.parallel(pug2html, styles, script, fonts, svgSprite)
+const prod = gulp.parallel(pug2html, styles, script, fonts, imageMinify.imageMinifyImagemin, imageMinify.imageMinifyTinyPNG, svgSprite)
 
-const build = gulp.series(clean, copyDependencies, dev)
+const devBuild = gulp.series(clean, copyDependencies, dev)
+const prodBuild = gulp.series(clean, copyDependencies, prod)
 
-module.exports.start = gulp.series(build, serve)
-module.exports.build = build
+module.exports.start = gulp.series(devBuild, serve)
+module.exports.build = prodBuild
 
 module.exports.lighthouse = gulp.series(lighthouse)
+
